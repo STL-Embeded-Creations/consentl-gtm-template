@@ -1,0 +1,7 @@
+homepage: "https://consentl.com"
+documentation: "https://github.com/STL-Embeded-Creations/consentl-gtm-template#readme"
+versions:
+  # Latest version first. Add the commit SHA of the gallery repository that contains template.tpl
+  # after it has been pushed there (see README.md, "Publishing"). The value below is a placeholder.
+  - sha: 0000000000000000000000000000000000000000
+    changeNotes: Initial release.
