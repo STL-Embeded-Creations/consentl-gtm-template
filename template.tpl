@@ -290,7 +290,12 @@ const runtimeLoaded = () => !!copyFromWindow('Consentl.version');
 const gcmOn = () => copyFromWindow('consentl.c.gcm.on') === true;
 const planHasGcm = () => gcmOn() || copyFromWindow('consentl.c.gcm.plan') === true;
 // 'on': defaults and updates; 'off': switched off by the merchant; 'free': plan without Consent Mode.
-const gcmMode = () => (gcmOn() ? 'on' : planHasGcm() ? 'off' : 'free');
+// No nested ternary: the GTM sandbox groups `a ? b : c ? d : e` as `(a ? b : c) ? d : e`, which
+// turned 'on' into 'off' (found with the GTM Tests tab, 2026-10-28).
+const gcmMode = () => {
+  if (gcmOn()) return 'on';
+  return planHasGcm() ? 'off' : 'free';
+};
 
 const onConsent = (choices) => {
   if (choices && gcmOn()) updateConsentState(gcmState(choices));
